@@ -52,9 +52,9 @@ command -v apk >/dev/null 2>&1 || {
 }
 
 ARCH="$(apk --print-arch 2>/dev/null | sed -n '1p')"
-KERNEL_PACKAGE="$(apk info -v kernel 2>/dev/null | sed -n '1p' || true)"
+KERNEL_PACKAGE="$(apk list --installed kernel 2>/dev/null | sed -n '1p' || true)"
 if [ -z "$KERNEL_PACKAGE" ]; then
-    KERNEL_PACKAGE="$(apk list --installed kernel 2>/dev/null | sed -n '1p' || true)"
+    KERNEL_PACKAGE="$(apk info -a kernel 2>/dev/null | sed -n '1s/ description:$//p' || true)"
 fi
 
 if [ -z "$ARCH" ] || [ -z "$KERNEL_PACKAGE" ]; then

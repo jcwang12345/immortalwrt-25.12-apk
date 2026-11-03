@@ -25,7 +25,7 @@ does not use `--allow-untrusted` or any force-install option.
 1. Check the installed kernel package/ABI:
 
    ```sh
-   apk info kernel
+   apk list --installed kernel
    ```
 
 2. Add **one matching kmods URL** from `compatibility.json`, plus the base URL for your architecture, to:

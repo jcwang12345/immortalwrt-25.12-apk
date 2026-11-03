@@ -28,6 +28,9 @@ case "\$1" in
     info)
         echo '$kernel_package'
         ;;
+    list)
+        echo '$kernel_package $architecture {feeds/base/kernel/linux} (GPL-2.0-only) [installed]'
+        ;;
     update)
         exit '$update_status'
         ;;
