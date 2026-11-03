@@ -4,6 +4,24 @@ Signed apk-tools v3 repository for `kmod-ifb`, `kmod-sched-core`, and `tc-full`.
 
 ## Usage
 
+### Automatic configuration (recommended)
+
+The installer reads the actual apk architecture and installed kernel ABI,
+selects exactly one matching kmods index, verifies the dedicated repository
+public key, writes its own repository file, and runs `apk update`:
+
+```sh
+wget -O /tmp/install-feed.sh https://jcwang12345.github.io/immortalwrt-25.12-apk/install-feed.sh
+sh /tmp/install-feed.sh --dry-run
+sh /tmp/install-feed.sh
+```
+
+Add `--install-ifb` to the final command only when the packages also need to be
+installed. Unknown ABIs are rejected without changing the router. The script
+does not use `--allow-untrusted` or any force-install option.
+
+### Manual configuration
+
 1. Check the installed kernel package/ABI:
 
    ```sh
@@ -53,6 +71,7 @@ Exact kmod repository URLs and ABI values are listed in [`compatibility.json`](c
 ## Important
 
 - Architecture alone is not sufficient for kernel modules; the full kernel ABI must match.
+- The automatic installer selects by the installed kernel ABI, not by the OpenClash or PassWall service name.
 - The older V19 ABI is intentionally not claimed compatible.
 - No default traffic-shaping policy is installed by these packages.
 - Q30 Pro firmware images are separate from legacy Q30; this repository contains packages only.
